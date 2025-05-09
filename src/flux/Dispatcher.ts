@@ -1,4 +1,4 @@
-export interface Action {
+export interface Plant {
     id: number,
     commonName: string,
     scientificName: string,
@@ -8,6 +8,12 @@ export interface Action {
     floweringSeason: string,
     sunExposure: string,
     watering: string
+}
+
+export interface Action {
+    type: string,
+    payload:any,
+
 }
 
 export class Dispatcher {

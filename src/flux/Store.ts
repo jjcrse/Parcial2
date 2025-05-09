@@ -1,6 +1,6 @@
-import { Dispatcher, Action } from "./Dispatcher";
+import { Dispatcher, Action, Plant } from "./Dispatcher";
 import { ActionType } from "./Actions";
-import { Plant } from "../services/Plants";
+
 
 export interface State {
     plants: Plant[];
