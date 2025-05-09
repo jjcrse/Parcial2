@@ -1,7 +1,6 @@
-// src/Root/Root.ts
 import { store } from "../flux/Store";
 import { Actions } from "../flux/Actions";
-import "../components/GardenView.ts";
+import "../components/GardenView";
 import "../components/EditGarden";
 import "../components/EditplantForm";
 
@@ -22,6 +21,7 @@ class Root extends HTMLElement {
     async loadData() {
         const { getPlants } = await import("../services/Plants");
         const plants = await getPlants();
+        console.log(plants)
         Actions.loadPlants(plants);
     }
 
@@ -36,10 +36,8 @@ class Root extends HTMLElement {
                 <button id="modificar-plantas">Modo Admin</button>
             </nav>
             <main>
-                ${state.currentPage === "inicio" ? "<garden-view></garden-view>" : ""}
-                ${state.currentPage === "modificar-jardin" ? "<edit-garden></edit-garden>" : ""}
-                ${state.currentPage === "modificar-plantas" ? "<edit-plant-form></edit-plant-form>" : ""}
-            </main>
+                <garden-view></garden-view>
+           <./main>
             <style>
                 nav { display: flex; gap: 8px; margin-bottom: 16px; }
                 button { padding: 6px 12px; }

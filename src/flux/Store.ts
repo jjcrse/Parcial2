@@ -1,5 +1,6 @@
 import { Dispatcher, Action, Plant } from "./Dispatcher";
 import { ActionType } from "./Actions";
+import { getPlants } from "../services/Plants";
 
 
 export interface State {
