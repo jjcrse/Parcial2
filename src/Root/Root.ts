@@ -37,7 +37,8 @@ class Root extends HTMLElement {
             </nav>
             <main>
                 <garden-view></garden-view>
-           <./main>
+                
+            </main>
             <style>
                 nav { display: flex; gap: 8px; margin-bottom: 16px; }
                 button { padding: 6px 12px; }
