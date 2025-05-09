@@ -1,34 +1,84 @@
-import { AppDispatcher, Action } from './Dispatcher';
+import { Dispatcher, Action } from "./Dispatcher";
+import { ActionType } from "./Actions";
+import { Plant } from "../services/Plants";
 
-export type State = {};
+export interface State {
+    plants: Plant[];
+    garden: {
+        name: string;
+        plantIds: number[];
+    };
+    currentPage: "inicio" | "modificar-jardin" | "modificar-plantas";
+}
 
 type Listener = (state: State) => void;
 
-class Store {
-    private _myState: State = {}
+export const AppDispatcher = new Dispatcher();
 
-    private _listeners: Listener[] = [];
+class Store {
+    private state: State = {
+        plants: [],
+        garden: {
+            name: "Mi Jardín",
+            plantIds: []
+        },
+        currentPage: "inicio"
+    };
+
+    private listeners: Listener[] = [];
 
     constructor() {
-        AppDispatcher.register(this._handleActions.bind(this));
+        AppDispatcher.register(this.reduce.bind(this));
     }
 
-    getState() {
-        return {};
-    }
-
-    _handleActions(action: Action): void {
+    private reduce(action: Action) {
         switch (action.type) {
-            case "UNO":
+            case ActionType.LOAD_PLANTS:
+                this.state.plants = action.payload;
+                break;
+
+            case ActionType.SET_PAGE:
+                this.state.currentPage = action.payload;
+                break;
+
+            case ActionType.UPDATE_PLANT:
+                const updated = action.payload;
+                this.state.plants = this.state.plants.map(p =>
+                    p.id === updated.id ? updated : p
+                );
+                break;
+
+            case ActionType.TOGGLE_PLANT_IN_GARDEN:
+                const id = action.payload;
+                const index = this.state.garden.plantIds.indexOf(id);
+                if (index >= 0) {
+                    this.state.garden.plantIds.splice(index, 1);
+                } else {
+                    this.state.garden.plantIds.push(id);
+                }
+                break;
+
+            case ActionType.SET_GARDEN_NAME:
+                this.state.garden.name = action.payload;
                 break;
         }
+
+        this.notify();
     }
 
-    private _emitChange(): void {
-        for (const listener of this._listeners) { }
+    public getState(): State {
+        return structuredClone(this.state);
     }
 
-    unsubscribe(listener: Listener): void { }
+    public subscribe(listener: Listener) {
+        this.listeners.push(listener);
+    }
+
+    private notify() {
+        for (const listener of this.listeners) {
+            listener(this.getState());
+        }
+    }
 }
 
 export const store = new Store();

@@ -39,6 +39,6 @@ export default {
         path: path.resolve(__dirname, 'dist'),
     },
     devServer: {
-        port: 8082
+        port: 8080
     }
 };

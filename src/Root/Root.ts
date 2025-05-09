@@ -1,4 +1,4 @@
-import { store } from '../flux/Store';
+import { store } from "../flux/Store";
 
 class Root extends HTMLElement {
     constructor() {

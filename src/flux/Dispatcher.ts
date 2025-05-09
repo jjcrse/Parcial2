@@ -1,6 +1,13 @@
 export interface Action {
-    type: string;
-    payload?: string;
+    id: number,
+    commonName: string,
+    scientificName: string,
+    img: string,
+    type: string,
+    origin: string,
+    floweringSeason: string,
+    sunExposure: string,
+    watering: string
 }
 
 export class Dispatcher {
@@ -22,7 +29,6 @@ export class Dispatcher {
 }
 
 export const AppDispatcher = new Dispatcher();
-
 
 
 
