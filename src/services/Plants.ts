@@ -21,3 +21,6 @@ export async function getPlants(): Promise<Plant[]> {
         return [];
     }
 }
+
+
+//!Nos vemos el otro semestre

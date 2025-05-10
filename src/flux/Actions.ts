@@ -1,5 +1,5 @@
 import { AppDispatcher } from "./Dispatcher";
-import { Plant } from "../services/Plants";
+import { getPlants, Plant } from "../services/Plants";
 
 export enum ActionType {
     LOAD_PLANTS = "LOAD_PLANTS",
@@ -30,3 +30,5 @@ export const Actions = {
         AppDispatcher.dispatch({ type: ActionType.SET_GARDEN_NAME, payload: name });
     }
 };
+
+//!Nos vemos el otro semestre

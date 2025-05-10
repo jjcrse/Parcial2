@@ -83,3 +83,4 @@ class Store {
 }
 
 export const store = new Store();
+//!Nos vemos el otro semestre
